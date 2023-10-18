@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>인생여전...아닌가요?</title>
+    <style type="text/css">
+        body { margin: 0; }
+        #images-container {
+            position: absolute;
+            top: 18%;
+            left: 25%;
+            width: 50%;
+            z-index: 10;
+        }
+        .image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: none;
+        }
+        #black { display: block; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <img src="bg.jpg" id="bg" width="100%" style="z-index: 0;">
+    <div id="images-container">
+        <img src="black.png" class="image" id="black" onclick="toggleImage()">
+        <img src="rainbow.png" class="image" id="rainbow">
+        <img src="white.png" class="image" id="white">
+        <img src="yellow.png" class="image" id="yellow" onclick="removeClickEvent()">
+        <img src="good.png" id="good" style="position: absolute; right: -30%; width: 50%; z-index: 10; display: none;" onclick="showAlert()">
+        <img src="bad.png" id="bad" style="position: absolute; right: 80%; width: 50%; z-index: 10; display: none;" onclick="refreshPage()">
+    </div>
+
+    <audio id="clickSound" src="click.mp3"></audio>
+
+    <script type="text/javascript">
+        let clickEnabled = true;
+
+        function toggleImage() {
+            if (clickEnabled) {
+
+                const clickSound = document.getElementById('clickSound');
+                clickSound.play();
+
+                const images = document.getElementsByClassName("image");
+                for (let i = 0; i < images.length; i++) {
+                    images[i].style.display = "none";
+                }
+
+                const imageIds = ["rainbow", "white", "yellow"];
+                const randomIndex = Math.floor(Math.random() * imageIds.length);
+                const randomImageId = imageIds[randomIndex];
+                const targetImage = document.getElementById(randomImageId);
+                targetImage.style.display = "block";
+
+                document.getElementById("good").style.display = "block";
+                document.getElementById("bad").style.display = "block";
+
+                clickEnabled = false;
+            }
+        }
+
+        function removeClickEvent() {
+            document.getElementById("yellow").removeAttribute("onclick");
+        }
+
+        function refreshPage() {
+            location.reload();
+        }
+
+        function showAlert() {
+            alert("축하드립니다! 유용하게 사용하시길!");
+        }
+    </script>
+</body>
+</html>
+
+
+

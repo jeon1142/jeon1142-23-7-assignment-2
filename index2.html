@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>복권 만드는 중...</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.css">
+    <style type="text/css">
+        body { margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        #loading-bar-container { width: 300px; background-color: #ffffff; border: 2px solid #000; position: relative; }
+        #loading-bar { width: 0; height: 30px; background-color: #ff00f3; transition: width 0.3s; }
+        #loading-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'NeoDunggeunmoPro-Regular'; font-size: 18px; white-space: nowrap; }
+        @font-face {font-family: 'NeoDunggeunmoPro-Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2'); font-weight: normal; font-style: normal;}
+    </style>
+</head>
+<body>
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+        <div id="loading-text">준비 중...</div>
+    </div>
+
+    <script type="text/javascript">
+        function simulateLoading() {
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingText = document.getElementById('loading-text');
+            const totalLoadingTime = 3000;
+            let width = 0;
+            const increment = 1;
+            const delay = 40;
+            const interval = setInterval(function() {
+                if (width < 100) {
+                    width += increment;
+                    loadingBar.style.width = width + '%';
+                }
+
+                if (width >= 60) {
+                    loadingText.textContent = '정말 열심히 준비 중...';
+                }
+
+                if (width >= 100) {
+                    clearInterval(interval);
+                    redirectToAnotherPage();
+                }
+            }, delay);
+        }
+
+        window.addEventListener('load', function() {
+            simulateLoading();
+        });
+
+        function redirectToAnotherPage() {
+            window.location.href = 'index3.html';
+        }
+    </script>
+</body>
+</html>
